@@ -1,34 +1,53 @@
 "use script";
 
-let keturkampis = {
-    a:3,
-    b:4,
+document.getElementById("patvirtinti").addEventListener("click", function() {
+    let a,b;
+    a = parseFloat(document.getElementById("a-krastine").value);
+    b = parseFloat(document.getElementById("b-krastine").value);
 
-    plotasPerimetras:function(){
-        let plotas;
-        let perimetras;
+    let kvadratas = {
+        a: 1000,
+        b: 2000,
+    
 
-        plotas = this.a *this.b;
-        perimetras =2 *this.a + 2 * this.b;
+        paleidimas: function() {
+            this.a = a;
+            this.b = b;
+        },
 
+        plotasPerimetras: function() {
+    
+            let plotas;
+            let perimetras;
+    
+            plotas = this.a * this.b;
+            perimetras= 2 * this.a + 2 * this.b;
+            
+            return [plotas, perimetras] 
+        },
+    
+        istrizaine: function() {
+            let ilgis;
+            ilgis = Math.sqrt(this.a * this.a + this.b * this.b );
+            return ilgis;
+        },
+    
+        nubrezk: function() {
+            let elementas = document.querySelector(".keturkampis");
+            elementas.style.width = this.a + "px";
+            elementas.style.height = this.b + "px";
+        },
+    
+        isvesk: function() {
+            document.getElementById("kvadrato-perimetras").innerText = "Kvadrato perimetras " +  kvadratas.plotasPerimetras()[1];
+            document.getElementById("kvadrato-plotas").innerText ="Kvadrato plotas " + kvadratas.plotasPerimetras()[0];
+            document.getElementById("kvadrato-istrizaine").innerText = "Kvadrato istrizaine " + kvadratas.istrizaine();
+        }
+    
+    };
+    
+    kvadratas.paleidimas();
+    kvadratas.isvesk();
+    kvadratas.nubrezk();
 
-        return[plotas, perimetras]
-    },
-    istrizaine:function(){
-        let ilgis;
-        ilgis = Math.sqrt(this.a * this.a + this.b * this.b);
-        return ilgis;
-
-
-
-        return 0
-    }
-};
-
-
-console.log(keturkampis.plotasPerimetras());
-console.log(keturkampis.istrizaine());
-
-document.getElementById("keturkampio-perimetras").innerText ="keturkampio perimetras" + keturkampio.plotasPerimetras()[1];
-document.getElementById("keturkampio-plotas").innerText ="keturkampio plotas" + keturkampio.plotasPerimetras()[0];
-document.getElementById("keturkampio-istrizaine").innerText ="keturkampio istrizaine" + keturkampio.istrizaine();
+});
